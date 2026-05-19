@@ -11,18 +11,21 @@ public interface IStudentDAO {
 
     /**
      * 保存
+     *
      * @param student
      */
     void save(Student student);
 
     /**
      * 删除
+     *
      * @param id
      */
     void delete(Long id);
 
     /**
      * 修改
+     *
      * @param id
      * @param student
      */
@@ -30,6 +33,7 @@ public interface IStudentDAO {
 
     /**
      * 查询
+     *
      * @param id
      * @return
      */
@@ -37,6 +41,7 @@ public interface IStudentDAO {
 
     /**
      * 查询
+     *
      * @return
      */
     List<Student> listAll();

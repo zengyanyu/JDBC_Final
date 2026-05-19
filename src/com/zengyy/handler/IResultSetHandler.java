@@ -1,7 +1,6 @@
 package com.zengyy.handler;
 
 import java.sql.ResultSet;
-import java.util.List;
 
 /**
  * @author zengyanyu
