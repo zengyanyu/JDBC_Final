@@ -40,9 +40,11 @@ public class JdbcTemplate {
     }
 
     /**
-     * @param sql
-     * @param rsh
-     * @param params
+     * DQL(查询)的模板
+     *
+     * @param sql    DQL操作的SQL模板
+     * @param rsh    结果集处理器
+     * @param params SQL模板中?对应的参数值
      * @return
      */
     public static <T> T query(String sql, IResultSetHandler<T> rsh, Object... params) {

@@ -24,6 +24,11 @@ public class DruidUtil {
         }
     }
 
+    /**
+     * 获取连接对象
+     *
+     * @return
+     */
     public static Connection getConn() {
         try {
             return ds.getConnection();

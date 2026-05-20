@@ -13,13 +13,13 @@ import java.util.Properties;
  */
 public class JdbcUtil {
 
-    private static Properties properties = new Properties();
+    private static Properties p = new Properties();
 
     static {
         try {
             InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties");
-            properties.load(inputStream);
-            Class.forName(properties.getProperty("driverClassName"));
+            p.load(inputStream);
+            Class.forName(p.getProperty("driverClassName"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -33,10 +33,8 @@ public class JdbcUtil {
     public static Connection getConn() {
         try {
             return DriverManager.getConnection(
-                    properties.getProperty("url"),
-                    properties.getProperty("username"),
-                    properties.getProperty("password"));
-        } catch (Exception e) {
+                    p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
