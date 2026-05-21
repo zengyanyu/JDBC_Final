@@ -31,6 +31,7 @@ public class DruidUtil {
      */
     public static Connection getConn() {
         try {
+            System.out.println("ds = " + ds);
             return ds.getConnection();
         } catch (Exception e) {
             e.printStackTrace();

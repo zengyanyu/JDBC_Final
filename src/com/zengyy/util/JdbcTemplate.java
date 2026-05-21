@@ -92,7 +92,7 @@ public class JdbcTemplate {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = JdbcUtil.getConn();
+            conn = DruidUtil.getConn();
             ps = conn.prepareStatement(sql);
             // 设置占位符参数
             for (int index = 0; index < params.length; index++) {
