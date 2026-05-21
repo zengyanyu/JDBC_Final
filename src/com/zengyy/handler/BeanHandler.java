@@ -18,7 +18,7 @@ public class BeanHandler<T> implements IResultSetHandler<T> {
 
     @Override
     public T handle(ResultSet rs) throws Exception {
-        T obj = classType.newInstance();
+        T obj = classType.getDeclaredConstructor().newInstance();
         BeanInfo beanInfo = Introspector.getBeanInfo(classType, Object.class);
         PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
         if (rs.next()) {
