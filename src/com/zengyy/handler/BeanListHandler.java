@@ -20,13 +20,14 @@ public class BeanListHandler<T> implements IResultSetHandler<List<T>> {
 
     @Override
     public List<T> handle(ResultSet rs) throws Exception {
+        BeanInfo beanInfo = Introspector.getBeanInfo(classType, Object.class);
+        PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+
         List<T> list = new ArrayList<>();
         while (rs.next()) {
-            T obj = classType.newInstance();
+            T obj = classType.getDeclaredConstructor().newInstance();
             list.add(obj);
 
-            BeanInfo beanInfo = Introspector.getBeanInfo(classType, Object.class);
-            PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
             for (PropertyDescriptor pd : pds) {
                 String columnName = pd.getName();
                 Object value = rs.getObject(columnName);
