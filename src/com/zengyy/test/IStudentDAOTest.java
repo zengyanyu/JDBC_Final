@@ -23,6 +23,16 @@ public class IStudentDAOTest {
     }
 
     @Test
+    public void saveBatch() {
+        for (int i = 0; i < 10000; i++) {
+            Student student = new Student();
+            student.setName("Will");
+            student.setAge(17);
+            dao.save(student);
+        }
+    }
+
+    @Test
     public void delete() {
         dao.delete(2L);
     }
@@ -43,9 +53,17 @@ public class IStudentDAOTest {
 
     @Test
     public void listAll() {
+        long begin = System.currentTimeMillis();
         List<Student> students = dao.listAll();
         for (Student student : students) {
             System.out.println("student = " + student);
         }
+        System.out.println(System.currentTimeMillis() - begin);
+    }
+
+    @Test
+    public void total() {
+        Long total = dao.total();
+        System.out.println("total = " + total);
     }
 }

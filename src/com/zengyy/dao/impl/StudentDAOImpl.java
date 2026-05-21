@@ -42,4 +42,16 @@ public class StudentDAOImpl implements IStudentDAO {
         return JdbcTemplate.query(sql, new BeanListHandler<>(Student.class));
     }
 
+    @Override
+    public Long total() {
+        String sql = "SELECT COUNT(id) AS id FROM student";
+        return JdbcTemplate.query(sql, rs -> {
+            if (rs.next()) {
+                return rs.getLong(1);
+//                    return rs.getLong("id");
+            }
+            return 0L;
+        });
+    }
+
 }

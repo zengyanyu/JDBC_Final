@@ -45,4 +45,10 @@ public interface IStudentDAO {
      * @return
      */
     List<Student> listAll();
+
+    /**
+     * 查询总条数
+     * @return
+     */
+    Long total();
 }
