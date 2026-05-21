@@ -24,12 +24,7 @@ public class IStudentDAOTest {
 
     @Test
     public void saveBatch() {
-        for (int i = 0; i < 10000; i++) {
-            Student student = new Student();
-            student.setName("Will");
-            student.setAge(17);
-            dao.save(student);
-        }
+        dao.batchSave();
     }
 
     @Test

@@ -17,6 +17,11 @@ public interface IStudentDAO {
     void save(Student student);
 
     /**
+     * 批量保存
+     */
+    void batchSave();
+
+    /**
      * 删除
      *
      * @param id

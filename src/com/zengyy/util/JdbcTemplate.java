@@ -40,6 +40,46 @@ public class JdbcTemplate {
     }
 
     /**
+     * 批量DML操作（批量插入、批量更新、批量删除）
+     *
+     * @param sql    带占位符的SQL语句（例如 INSERT INTO t_user(name,age) VALUES(?,?)）
+     * @param params 批量参数列表：每一个 Object[] 是一组占位符参数
+     * @return 每条SQL受影响的行数数组
+     */
+    public static int[] batchUpdate(String sql, Object[]... params) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = JdbcUtil.getConn();
+            // 关闭自动提交，批量操作必须手动控制事务
+            conn.setAutoCommit(false);
+
+            ps = conn.prepareStatement(sql);
+
+            // 遍历每一组参数，添加到批处理
+            for (Object[] param : params) {
+                // 给占位符赋值
+                for (int i = 0; i < param.length; i++) {
+                    ps.setObject(i + 1, param[i]);
+                }
+                // 添加到批处理任务
+                ps.addBatch();
+            }
+
+            // 执行批量操作
+            int[] rows = ps.executeBatch();
+            // 提交事务
+            conn.commit();
+            return rows;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.close(conn, ps, null);
+        }
+        return new int[0];
+    }
+
+    /**
      * DQL(查询)的模板
      *
      * @param sql    DQL操作的SQL模板
